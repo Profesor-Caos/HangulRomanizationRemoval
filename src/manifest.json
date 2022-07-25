@@ -1,0 +1,15 @@
+{
+    "name": "Hangeul Romanization Remover",
+    "description": "An extension that parses webpages and attempts to find and remove romanization of Hangeul",
+    "version": "1.0",
+    "manifest_version": 3,
+    "content_scripts": [
+      {
+          "matches": [ "<all_urls>" ],
+          "match_about_blank": true,
+          "all_frames": true,
+          "js": [ "content.js" ],
+          "run_at": "document_end"
+      }
+    ]
+  }
