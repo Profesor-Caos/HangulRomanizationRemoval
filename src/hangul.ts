@@ -4,6 +4,17 @@ let finals: "ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈ�
 const  leftPunctuation =  "‘“({[⟨⟪«‹〔〖〘〚【〝｢《「『【（［";
 const rightPunctuation = "’”)}]⟩⟫»›〕〗〙〛】〞｣》」』】）］";
 
+class HangulInText {
+    text: string;
+    index: number;
+
+    constructor(text: string, index: number) {
+        this.text = text;
+        this.index = index;
+    }
+
+}
+
 /**
  * Determines whether a character represents Hangul
  * @param {number} charCode 
@@ -77,8 +88,9 @@ export function isCharacterCodeHanCharacter(charCode: number): boolean {
     then after we reach the end, we can backtrack from the start to try to add punctuation. We wouldn't want terminating punctuation, but might want to add left specific
     characters if there are right specific ones to match.
 */
-export function fixPunctuation(text: string, hangul: string, startingIndex: number, endIndex: number): string {
+export function fixPunctuation(text: string, hangul: string, startingIndex: number): string {
     let lookbackIndex: number = startingIndex - 1;
+    let endIndex: number = startingIndex + hangul.length - 1;
     while (lookbackIndex >= 0) {
         if (!isCharacterCodeHangulPunctuation(text.charCodeAt(lookbackIndex)))
         {
@@ -92,11 +104,16 @@ export function fixPunctuation(text: string, hangul: string, startingIndex: numb
         }
         let rightPunct: string = rightPunctuation.charAt(punctuationIndex);
         if (findUnmatchedRightPunctuation(hangul, char, rightPunct))
+        {
             hangul = char + hangul; // Add this left punctuation to the start of the hangul string.
+            endIndex++;
+        }
     }
 
-    lookbackIndex = endIndex + 1; // start looking at the last character in the string.
+    lookbackIndex = endIndex; // start looking at the last character in the string.
+    let hangulIndex = hangul.length;
     while (lookbackIndex-- > 0) {
+        hangulIndex--;
         let char: string = text.charAt(lookbackIndex);
         if (char == ' ')
         {
@@ -109,14 +126,14 @@ export function fixPunctuation(text: string, hangul: string, startingIndex: numb
         let punctuationIndex: number = rightPunctuation.indexOf(char);
         if (punctuationIndex == -1)
         {
-            hangul = hangul.slice(0, lookbackIndex) + hangul.slice(lookbackIndex + 1);
+            hangul = hangul.slice(0, hangulIndex) + hangul.slice(hangulIndex + 1);
             continue; // Punctuation/symbol, but not closing punctuation.
         }
         let leftPunct: string = leftPunctuation.charAt(punctuationIndex);
-        if (!findUnmatchedLeftPunctuation(hangul.slice(0, lookbackIndex), leftPunct, char))
+        if (!findUnmatchedLeftPunctuation(hangul.slice(0, hangulIndex), leftPunct, char))
         {
             // remove the closing punctuation if it doesn't have an unpaired opening one
-            hangul = hangul.slice(0, lookbackIndex) + hangul.slice(lookbackIndex + 1);
+            hangul = hangul.slice(0, hangulIndex) + hangul.slice(hangulIndex + 1);
         }
     }
     return hangul;
@@ -165,8 +182,8 @@ export function findUnmatchedLeftPunctuation(text: string, leftPunct: string, ri
  * @param {string} text 
  * @returns 
  */
-export function extractHangul(text: string): string {
-    let hangul: string[] = []; // Todo: make a Hangul phrase class that includes the string and the index of where it is in the text....
+export function extractHangul(text: string): HangulInText[] {
+    let hangul: HangulInText[] = [];
     let currentHangul: string = '';
     let writingHangul = false;
     let currentCharCode = 0;
@@ -174,7 +191,6 @@ export function extractHangul(text: string): string {
     for (var i = 0; i< text.length; i++)
     {
         currentCharCode = text.charCodeAt(i);
-        let currentChar = text.charAt(i);
 
         if (writingHangul)
         {
@@ -182,8 +198,8 @@ export function extractHangul(text: string): string {
             {
                 // We've come across a character we don't want to extract. Stop and move to the next character.
                 writingHangul = false;
-                currentHangul = fixPunctuation(text, currentHangul, hangulStartIndex, 1);
-                hangul.push(currentHangul);
+                currentHangul = fixPunctuation(text, currentHangul, hangulStartIndex);
+                hangul.push(new HangulInText(currentHangul, hangulStartIndex));
                 currentHangul = '';
                 continue;
             }
@@ -199,15 +215,5 @@ export function extractHangul(text: string): string {
             currentHangul += text[i];        
         }
     }
-    return currentHangul;
-}
-
-function scan(text: string) {
-    for (var i = 0; i< text.length; i++)
-    {
-        if (isCharacterCodeHangul(text.charCodeAt(i)))
-        {
-
-        }
-    }
+    return hangul;
 }

@@ -12,8 +12,8 @@ describe("Test extract function", () => {
 describe("Test fixing punctuation", () => {
     let tests: any[] = [
         { input: ["", "", 0 , 0], output: ""}, 
-        { input: ["(ABC) DEF GHI (JKL.).", "ABC) DEF GHI (JKL.).", 1, 20], output: "(ABC) DEF GHI (JKL)"}, 
-        { input: ["abc (ABC) DEF GHI (JKL.).", "ABC) DEF GHI (JKL.).", 5, 24], output: "(ABC) DEF GHI (JKL)"}, 
+        { input: ["(ABC) DEF GHI (JKL.).", "ABC) DEF GHI (JKL.).", 1], output: "(ABC) DEF GHI (JKL)"}, 
+        { input: ["abc (ABC) DEF GHI (JKL.).abc", "ABC) DEF GHI (JKL.).", 5], output: "(ABC) DEF GHI (JKL)"}, 
         // { input: "()", output: ""}, 
         // { input: "(()(()A))", output: ""}, 
         // { input: "(()(()A)))", output: ""}, 
@@ -21,7 +21,7 @@ describe("Test fixing punctuation", () => {
 
     tests.forEach((test) => {
         it(`Should return ${test.output} for ${test.input}`, () => {
-            expect(hangul.fixPunctuation(test.input[0], test.input[1], test.input[2], test.input[3])).toBe(test.output);
+            expect(hangul.fixPunctuation(test.input[0], test.input[1], test.input[2])).toBe(test.output);
         });
     })
 })
