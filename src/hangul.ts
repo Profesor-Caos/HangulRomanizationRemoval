@@ -1,7 +1,7 @@
 let initials: "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ"
 let medials: "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ"
 let finals: "ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ"
-const  leftPunctuation =  "‘“({[⟨⟪«‹〔〖〘〚【〝｢《「『【（［";
+const  leftPunctuation = "‘“({[⟨⟪«‹〔〖〘〚【〝｢《「『【（［";
 const rightPunctuation = "’”)}]⟩⟫»›〕〗〙〛】〞｣》」』】）］";
 
 class HangulInText {

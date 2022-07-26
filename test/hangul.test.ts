@@ -14,9 +14,6 @@ describe("Test fixing punctuation", () => {
         { input: ["", "", 0 , 0], output: ""}, 
         { input: ["(ABC) DEF GHI (JKL.).", "ABC) DEF GHI (JKL.).", 1], output: "(ABC) DEF GHI (JKL)"}, 
         { input: ["abc (ABC) DEF GHI (JKL.).abc", "ABC) DEF GHI (JKL.).", 5], output: "(ABC) DEF GHI (JKL)"}, 
-        // { input: "()", output: ""}, 
-        // { input: "(()(()A))", output: ""}, 
-        // { input: "(()(()A)))", output: ""}, 
     ];
 
     tests.forEach((test) => {
