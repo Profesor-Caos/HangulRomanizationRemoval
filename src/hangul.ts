@@ -4,7 +4,7 @@ let finals: "ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈ�
 const  leftPunctuation = "‘“({[⟨⟪«‹〔〖〘〚【〝｢《「『【（［";
 const rightPunctuation = "’”)}]⟩⟫»›〕〗〙〛】〞｣》」』】）］";
 
-class HangulInText {
+export class HangulInText {
     text: string;
     index: number;
 
@@ -106,11 +106,10 @@ export function fixPunctuation(text: string, hangul: string, startingIndex: numb
         if (findUnmatchedRightPunctuation(hangul, char, rightPunct))
         {
             hangul = char + hangul; // Add this left punctuation to the start of the hangul string.
-            endIndex++;
         }
     }
 
-    lookbackIndex = endIndex; // start looking at the last character in the string.
+    lookbackIndex = endIndex + 1; // start looking at the last character in the string.
     let hangulIndex = hangul.length;
     while (lookbackIndex-- > 0) {
         hangulIndex--;
@@ -199,6 +198,7 @@ export function extractHangul(text: string): HangulInText[] {
                 // We've come across a character we don't want to extract. Stop and move to the next character.
                 writingHangul = false;
                 currentHangul = fixPunctuation(text, currentHangul, hangulStartIndex);
+                // TODO: If it adds extra characters to the start, the start index will have changed...
                 hangul.push(new HangulInText(currentHangul, hangulStartIndex));
                 currentHangul = '';
                 continue;
@@ -215,5 +215,12 @@ export function extractHangul(text: string): HangulInText[] {
             currentHangul += text[i];        
         }
     }
+
+    if (writingHangul) // We were still processing Hangul at the end, so we need to finish
+    {
+        currentHangul = fixPunctuation(text, currentHangul, hangulStartIndex);
+        hangul.push(new HangulInText(currentHangul, hangulStartIndex));
+    }
+
     return hangul;
 }

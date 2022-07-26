@@ -1,12 +1,28 @@
 import * as hangul from "../src/hangul";
 
 describe("Test extract function", () => {
-    let testString = "누구 ends in a vowel so it would have to be followed by 가, but “누구” plus “가” changes to “누가” instead of “누구가” for ease of pronunciation.";
-    let test2 = "\"누가 했어요?\""
+    let tests: any[] = [
+        { input: "", output: [] },
+        { input: "this (string) has, no 「不」 hangul", output: [] },
+        { input: "abc “(누가) 했어요?”", output:  [{"index": 4, "text": "“(누가) 했어요”"}] },
+        { input: "누구 a 가, b “누구” c “가” d “누가” e “누구가”.", output: [{"index": 0, "text": "누구 "}, {"index": 5, "text": "가,"}, {"index": 11, "text": "“누구” "}, {"index": 18, "text": "“가” "}, {"index": 24, "text": "“누가” "}] }, 
+    ];
+      
+    tests.forEach((test) => {
+        it(`should extract the hangul within the string ${test.input}`, () => {
+            expect(hangul.extractHangul(test.input)).toStrictEqual<hangul.HangulInText[]>(test.output);
+        });
+    })
 
-    it("should return the Hangul within 누구 ends in a vowel so it would have to be followed by 가, but “누구” plus “가” changes to “누가” instead of “누구가” for ease of pronunciation.", () => {
-        expect(hangul.extractHangul(testString)).toBe(15);
-      });
+    let fails: any[] = [
+        { input: "abc “(누가) 했어요?”", output: [{"index": 4, "text": "“(누가) 했어요”"}]},
+    ];
+
+    fails.forEach((test) => {
+        it(`should test that the ouput data fails ${test.input}`, () => {
+            expect(hangul.extractHangul(test.input)).not.toEqual(test.output);
+        })
+    })
 });
 
 describe("Test fixing punctuation", () => {
