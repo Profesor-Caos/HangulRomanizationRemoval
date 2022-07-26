@@ -88,9 +88,9 @@ export function isCharacterCodeHanCharacter(charCode: number): boolean {
     then after we reach the end, we can backtrack from the start to try to add punctuation. We wouldn't want terminating punctuation, but might want to add left specific
     characters if there are right specific ones to match.
 */
-export function fixPunctuation(text: string, hangul: string, startingIndex: number): string {
-    let lookbackIndex: number = startingIndex - 1;
-    let endIndex: number = startingIndex + hangul.length - 1;
+export function fixPunctuation(text: string, hangul: HangulInText): string {
+    let lookbackIndex: number = hangul.index - 1;
+    let endIndex: number = hangul.index + hangul.text.length - 1;
     while (lookbackIndex >= 0) {
         if (!isCharacterCodeHangulPunctuation(text.charCodeAt(lookbackIndex)))
         {
@@ -103,14 +103,15 @@ export function fixPunctuation(text: string, hangul: string, startingIndex: numb
             continue; // Punctuation/symbol, but not opening punctuation.
         }
         let rightPunct: string = rightPunctuation.charAt(punctuationIndex);
-        if (findUnmatchedRightPunctuation(hangul, char, rightPunct))
+        if (findUnmatchedRightPunctuation(hangul.text, char, rightPunct))
         {
-            hangul = char + hangul; // Add this left punctuation to the start of the hangul string.
+            hangul.text = char + hangul.text; // Add this left punctuation to the start of the hangul string.
+            hangul.index--;
         }
     }
 
     lookbackIndex = endIndex + 1; // start looking at the last character in the string.
-    let hangulIndex = hangul.length;
+    let hangulIndex = hangul.text.length;
     while (lookbackIndex-- > 0) {
         hangulIndex--;
         let char: string = text.charAt(lookbackIndex);
@@ -125,17 +126,17 @@ export function fixPunctuation(text: string, hangul: string, startingIndex: numb
         let punctuationIndex: number = rightPunctuation.indexOf(char);
         if (punctuationIndex == -1)
         {
-            hangul = hangul.slice(0, hangulIndex) + hangul.slice(hangulIndex + 1);
+            hangul.text = hangul.text.slice(0, hangulIndex) + hangul.text.slice(hangulIndex + 1);
             continue; // Punctuation/symbol, but not closing punctuation.
         }
         let leftPunct: string = leftPunctuation.charAt(punctuationIndex);
-        if (!findUnmatchedLeftPunctuation(hangul.slice(0, hangulIndex), leftPunct, char))
+        if (!findUnmatchedLeftPunctuation(hangul.text.slice(0, hangulIndex), leftPunct, char))
         {
             // remove the closing punctuation if it doesn't have an unpaired opening one
-            hangul = hangul.slice(0, hangulIndex) + hangul.slice(hangulIndex + 1);
+            hangul.text = hangul.text.slice(0, hangulIndex) + hangul.text.slice(hangulIndex + 1);
         }
     }
-    return hangul;
+    return hangul.text;
 }
 
 export function findUnmatchedRightPunctuation(text: string, leftPunct: string, rightPunct: string): boolean
@@ -197,9 +198,9 @@ export function extractHangul(text: string): HangulInText[] {
             {
                 // We've come across a character we don't want to extract. Stop and move to the next character.
                 writingHangul = false;
-                currentHangul = fixPunctuation(text, currentHangul, hangulStartIndex);
-                // TODO: If it adds extra characters to the start, the start index will have changed...
-                hangul.push(new HangulInText(currentHangul, hangulStartIndex));
+                let finished: HangulInText = new HangulInText(currentHangul, hangulStartIndex);
+                fixPunctuation(text, finished);
+                hangul.push(finished);
                 currentHangul = '';
                 continue;
             }
@@ -218,8 +219,9 @@ export function extractHangul(text: string): HangulInText[] {
 
     if (writingHangul) // We were still processing Hangul at the end, so we need to finish
     {
-        currentHangul = fixPunctuation(text, currentHangul, hangulStartIndex);
-        hangul.push(new HangulInText(currentHangul, hangulStartIndex));
+        let finished: HangulInText = new HangulInText(currentHangul, hangulStartIndex);
+        fixPunctuation(text, finished);
+        hangul.push(finished);
     }
 
     return hangul;
