@@ -1,8 +1,5 @@
-let initials: "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ"
-let medials: "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ"
-let finals: "ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ"
-const  leftPunctuation = "‘“({[⟨⟪«‹〔〖〘〚【〝｢《「『【（［";
-const rightPunctuation = "’”)}]⟩⟫»›〕〗〙〛】〞｣》」』】）］";
+const  leftPunctuation: string = "‘“({[⟨⟪«‹〔〖〘〚【〝｢《「『【（［";
+const rightPunctuation: string = "’”)}]⟩⟫»›〕〗〙〛】〞｣》」』】）］";
 
 export class HangulInText {
     text: string;
@@ -26,6 +23,14 @@ export function isCharacterCodeHangul(charCode: number): boolean {
         || charCode >= 0xA960 && charCode <= 0xA97F // Hangul Jamo Extended-A
         ||charCode >= 0xD7B0 && charCode <= 0xD7FF // Hangul Jamo Extended-B
     )
+}
+
+/**
+ * Determines whether a character represents Hangul
+ * @param {number} charCode 
+ */
+ export function isCharacterCodeHangulSyllable(charCode: number): boolean {
+    return (charCode >= 0xAC00 && charCode <= 0xD7A3)  // Hangul Syllables
 }
 
 /**
