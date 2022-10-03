@@ -1,11 +1,11 @@
-Filtering out Hangeul romanizations:
+Filtering out Hangul romanizations:
 
 We need to figure out if something is a romanization.
 
 We can scan text by character.
-If we encounter something that's written in Hangeul, we store this into a variable.
+If we encounter something that's written in Hangul, we store this into a variable.
 When we reach the end, we look at what comes after.
-If it's in brackets or parentheses, it becomes much more likely to be hangeul.
+If it's in brackets or parentheses, it becomes much more likely to be hangul.
 
 I think we need a method for determing if text is a romanization.
 There is surely a lot of english text that could not possible be a romanization, due to invalid characters, or sequences of characters (repeated consonants without vowels, for example)
