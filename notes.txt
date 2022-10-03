@@ -1,0 +1,36 @@
+Filtering out Hangeul romanizations:
+
+We need to figure out if something is a romanization.
+
+We can scan text by character.
+If we encounter something that's written in Hangeul, we store this into a variable.
+When we reach the end, we look at what comes after.
+If it's in brackets or parentheses, it becomes much more likely to be hangeul.
+
+I think we need a method for determing if text is a romanization.
+There is surely a lot of english text that could not possible be a romanization, due to invalid characters, or sequences of characters (repeated consonants without vowels, for example)
+    Letters not in romanization: q, f, z, x, v, and c not followed by h
+It would probably be easiest to represent this with a regex...
+After making such a regex, it could be tested with romanization data I already have (and I could generate more).
+A romanized syllable requires an initial consonant (can be null), a vowel, and a final consonant (can be null) from a specific list of acceptable initial and final consonants.
+
+(?:i|a|eo|eu|o|u|ae|e|ya|yeo|yo|yu|yae|ye|wa|oe|wae|wo|wi|we|ui) - non-capturing group for vowels
+(?:g|kk|n|d|tt|r|m|b|pp|s|ss|j|jj|ch|k|t|p|h) - non-capturing group for initial consonants
+(?:k|n|t|l|m|p|ng) - non-capturing group for final consonants
+
+All intervocalic consonant combinations can be matched by 0 or 1 of the final group followed by 0 or 1 of the initial group, except for "ll"
+So basically it would need to be (0 or 1 final AND 0 or 1 initial) OR ll
+
+This is the regex I came up with that doesn't account for ll intervocalically
+(?:(?:g|kk|n|d|tt|r|m|b|pp|s|ss|j|jj|ch|k|t|p|h)?(?:i|a|eo|eu|o|u|ae|e|ya|yeo|yo|yu|yae|ye|wa|oe|wae|wo|wi|we|ui)(?:k|n|t|l|m|p|ng)?)+
+
+To account for ll,
+
+initial? vowel (((final?initial?) OR (ll))? vowel)* final?
+(?:g|kk|n|d|tt|r|m|b|pp|s|ss|j|jj|ch|k|t|p|h)?(?:i|a|eo|eu|o|u|ae|e|ya|yeo|yo|yu|yae|ye|wa|oe|wae|wo|wi|we|ui)((?:((?:k|n|t|l|m|p|ng)?(?:g|kk|n|d|tt|r|m|b|pp|s|ss|j|jj|ch|k|t|p|h)?)|(?:ll)?)(?:i|a|eo|eu|o|u|ae|e|ya|yeo|yo|yu|yae|ye|wa|oe|wae|wo|wi|we|ui))*(?:k|n|t|l|m|p|ng)?
+Not the shortest regex...
+
+This just finds a string that could be a romanization though. What I need to do is tell if an entire word matches, so there needs to be word boundaries added.
+This is just \b at the beginning and end
+\b(?:g|kk|n|d|tt|r|m|b|pp|s|ss|j|jj|ch|k|t|p|h)?(?:i|a|eo|eu|o|u|ae|e|ya|yeo|yo|yu|yae|ye|wa|oe|wae|wo|wi|we|ui)((?:((?:k|n|t|l|m|p|ng)?(?:g|kk|n|d|tt|r|m|b|pp|s|ss|j|jj|ch|k|t|p|h)?)|(?:ll)?)(?:i|a|eo|eu|o|u|ae|e|ya|yeo|yo|yu|yae|ye|wa|oe|wae|wo|wi|we|ui))*(?:k|n|t|l|m|p|ng)?\b
+

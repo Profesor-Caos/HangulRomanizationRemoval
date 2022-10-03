@@ -1,5 +1,28 @@
 import * as romanization from "../src/romanization";
 
+describe("Test romanization regex", () => {
+    let tests: any[] = [
+        { input: "", output: false },
+        { input: "banana", output: true },
+        { input: "apple", output: false },
+        { input: "sagwa", output: true },
+        { input: "orange", output: true },
+        { input: "orenji", output: true },
+        { input: "annyeonghaseyo", output: true },
+        { input: "basket", output: false },
+        { input: "think", output: false },
+    ];
+
+    const re = new RegExp('\\b(?:g|kk|n|d|tt|r|m|b|pp|s|ss|j|jj|ch|k|t|p|h)?(?:i|a|eo|eu|o|u|ae|e|ya|yeo|yo|yu|yae|ye|wa|oe|wae|wo|wi|we|ui)((?:((?:k|n|t|l|m|p|ng)?(?:g|kk|n|d|tt|r|m|b|pp|s|ss|j|jj|ch|k|t|p|h)?)|(?:ll)?)(?:i|a|eo|eu|o|u|ae|e|ya|yeo|yo|yu|yae|ye|wa|oe|wae|wo|wi|we|ui))*(?:k|n|t|l|m|p|ng)?\\b');
+
+    tests.forEach((test) => {
+        console.log(re.exec(test.input));
+        it(`should return ${test.output} from ${test.input}`, () => {
+            expect(re.test(test.input)).toEqual(test.output);
+        });
+    })
+})
+
 describe("Test decomposing Hangul function", () => {
     let tests: any[] = [
         { input: "", output: "" },
@@ -148,7 +171,7 @@ describe("Test special cases", () => {
         { input: "괜찮게", output: "gwaenchanke" }, // before ㄱ
         { input: "않는", output: "anneun" }, // before ㄴ
         { input: "결코않다", output: "gyeolkoanta" }, // before ㄷ
-        { input: "괜찮습니다", output: "gwaenchansseumnida" }, // before ㅅ
+        { input: "괜찮습니다", output: "gwaenchanseumnida" }, // before ㅅ
         { input: "괜찮음", output: "gwaenchaneum" }, // before ㅇ
         // ㄷ - before other consonants
         { input: "걷기", output: "geotgi" }, // before ㄱ

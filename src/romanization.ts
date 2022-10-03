@@ -125,7 +125,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "kk",
 		"ㅌ" : "kt",
 		"ㅍ" : "kp",
-		"ㅎ" : "k" // also kh, maybe find more examples
+		"ㅎ" : "k" // TODO: also kh, maybe find more examples
 	},
 	"ㄲ" : { // k
 		"ㄱ" : "kg",
@@ -188,7 +188,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "nk",
 		"ㅌ" : "nt",
 		"ㅍ" : "np",
-		"ㅎ" : "nh" // maybe find more examples of this
+		"ㅎ" : "nh" // TODO: maybe find more examples of this
 	},
 	"ㄵ" : { // n
 		"ㄱ" : "ng",
@@ -209,7 +209,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "nk",
 		"ㅌ" : "nt",
 		"ㅍ" : "np",
-		"ㅎ" : "nch" // maybe find more examples of this, could probably be n or nh too?
+		"ㅎ" : "nch" // Could maybe be n or nh as well, but was nch in every example I could find (n=8, all followed by iotized vowels)
 	},
 	"ㄶ" : { // n, the ㅎ causes following consonant to be voiceless
 		"ㄱ" : "nk",
@@ -221,7 +221,8 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅁ" : "nm",
 		"ㅂ" : "np",
 		"ㅃ" : "npp",
-		"ㅅ" : "ns", // 괜찮습니다 -> gwaenchansseumnida (nss) per http://roman.cs.pusan.ac.kr/input_eng.aspx?
+		"ㅅ" : "ns", // TODO: 괜찮습니다 -> gwaenchansseumnida (nss) per http://roman.cs.pusan.ac.kr/input_eng.aspx? 
+					// https://github.com/osori/korean-romanizer/blob/master/korean_romanizer/pronouncer.py also has nh before s become nss
 		"ㅆ" : "nss",
 		"ㅇ" : "n", // nn if subject to ㄴinsertion like 삯일
 		"ㅈ" : "nj",
@@ -236,27 +237,27 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㄱ" : "tg",
 		"ㄲ" : "tkk",
 		"ㄴ" : "nn",
-		"ㄷ" : "kd",
-		"ㄸ" : "ktt",
+		"ㄷ" : "td",
+		"ㄸ" : "ttt",
 		"ㄹ" : "nn",
 		"ㅁ" : "nm",
 		"ㅂ" : "tb",
 		"ㅃ" : "tpp",
 		"ㅅ" : "ts",
 		"ㅆ" : "tss",
-		"ㅇ" : "d",
+		"ㅇ" : "d", // TODO: j before iotized vowel?
 		"ㅈ" : "tj",
 		"ㅉ" : "tjj",
 		"ㅊ" : "tch",
 		"ㅋ" : "tk",
 		"ㅌ" : "tt",
 		"ㅍ" : "tp",
-		"ㅎ" : "ch" // Probably palatalized because it's before an iotized vowel in the example I had
+		"ㅎ" : "ch" // TODO: Varies? Probably palatalized because it's before an iotized vowel in the example I had
 	},
 	"ㄹ" : { // l
 		"ㄱ" : "lg",
 		"ㄲ" : "lkk",
-		"ㄴ" : "ll", // find more examples of this? Wikipedia says ln
+		"ㄴ" : "ll", // TODO: find more examples of this? Wikipedia says ln
 		"ㄷ" : "ld",
 		"ㄸ" : "ltt",
 		"ㄹ" : "ll",
@@ -272,7 +273,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "lk",
 		"ㅌ" : "lt",
 		"ㅍ" : "lp",
-		"ㅎ" : "l"
+		"ㅎ" : "lh"
 	},
 	"ㄺ" : { // k
 		"ㄱ" : "kg",
@@ -293,7 +294,8 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "kk",
 		"ㅌ" : "kt",
 		"ㅍ" : "kp",
-		"ㅎ" : "lk" // maybe different when ㅎ is before non-iotized vowels, but I could only find it before 히 and 혀
+		"ㅎ" : "lk" // maybe different when ㅎ is before non-iotized vowels, but I could only find it before 히 and 혀 
+					// EDIT: This seems right either way.
 	},
 	"ㄻ" : { // m
 		"ㄱ" : "mg",
@@ -319,7 +321,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 	"ㄼ" : { // this one is usually pronounced as ㄹ, 밟 is an exception
 		"ㄱ" : "lg",
 		"ㄲ" : "lkk",
-		"ㄴ" : "ll", // more examples?
+		"ㄴ" : "ll", // TODO: more examples?
 		"ㄷ" : "ld",
 		"ㄸ" : "ltt",
 		"ㄹ" : "ll",
@@ -328,14 +330,14 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅃ" : "lpp",
 		"ㅅ" : "ls",
 		"ㅆ" : "lss",
-		"ㅇ" : "r",
-		"ㅈ" : "lj",
+		"ㅇ" : "lb",
+		"ㅈ" : "pj",
 		"ㅉ" : "ljj",
 		"ㅊ" : "lch",
 		"ㅋ" : "lk",
 		"ㅌ" : "lt",
 		"ㅍ" : "lp",
-		"ㅎ" : "l"
+		"ㅎ" : "p" // TODO: sometimes ph...
 	},
 	"ㄽ" : { // I found no examples of this before other consonants
 		"ㄱ" : "tg",
@@ -401,25 +403,27 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅎ" : "p" // don't know about this, just a guess basically.
 	},
 	"ㅀ" : { // l in the few examples I found
-		"ㄱ" : "lg",
+		"ㄱ" : "lk",
 		"ㄲ" : "lkk",
-		"ㄴ" : "ll", // need more examples of this/ TODO: look into this
-		"ㄷ" : "ld",
+		"ㄴ" : "ll", // need more examples of this, all my examples are before 는
+					 // TODO: look into this
+					 // according to https://github.com/osori/korean-romanizer/blob/master/korean_romanizer/pronouncer.py this would be ln
+		"ㄷ" : "lt",
 		"ㄸ" : "ltt",
-		"ㄹ" : "nn",
+		"ㄹ" : "lr",
 		"ㅁ" : "nm",
-		"ㅂ" : "lb",
+		"ㅂ" : "lp",
 		"ㅃ" : "lpp",
-		"ㅅ" : "ls",
+		"ㅅ" : "ls", // TODO: according to https://github.com/osori/korean-romanizer/blob/master/korean_romanizer/pronouncer.py this would be lss
 		"ㅆ" : "lss",
 		"ㅇ" : "r",
-		"ㅈ" : "lj",
+		"ㅈ" : "lch",
 		"ㅉ" : "ljj",
 		"ㅊ" : "lch",
 		"ㅋ" : "lk",
 		"ㅌ" : "lt",
 		"ㅍ" : "lp",
-		"ㅎ" : "l" // don't know about this, just a guess basically.
+		"ㅎ" : "l" // TODO: don't know about this, just a guess basically.
 	},
 	"ㅁ" : { // m
 		"ㄱ" : "mg",
@@ -490,7 +494,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㄴ" : "nn",
 		"ㄷ" : "td",
 		"ㄸ" : "ttt",
-		"ㄹ" : "nn", // find more examples of this, my one example is 마못류 (tr)
+		"ㄹ" : "nn", // TODO: find more examples of this, my one example is 마못류 (tr)
 		"ㅁ" : "nm",
 		"ㅂ" : "tb",
 		"ㅃ" : "tpp",
@@ -543,7 +547,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅉ" : "ngjj",
 		"ㅊ" : "ngch",
 		"ㅋ" : "ngk",
-		"ㅌ" : "ngng",
+		"ㅌ" : "ngt",
 		"ㅍ" : "ngp",
 		"ㅎ" : "ngh" // could vary probably
 	},
@@ -622,7 +626,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅃ" : "tpp",
 		"ㅅ" : "ts",
 		"ㅆ" : "tss",
-		"ㅇ" : "ss",
+		"ㅇ" : "t",
 		"ㅈ" : "tj",
 		"ㅉ" : "tjj",
 		"ㅊ" : "tch",
@@ -652,7 +656,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅍ" : "pp", // could find no examples of this
 		"ㅎ" : "p" // probably varies
 	},
-	"ㅎ" : { // t
+	"ㅎ" : { // t - words basically don't end in ㅎ. 히읗, the name of the jamo is an exception, and it's pronounced as a t
 		"ㄱ" : "k",
 		"ㄲ" : "", // could find no examples of this
 		"ㄴ" : "nn",
@@ -662,9 +666,11 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅁ" : "nm", // could find no examples of this, Wikipedia says nm
 		"ㅂ" : "b", // find more examples, this seems wrong, since it should make the adjacent vowel unvoiced.
 		"ㅃ" : "", // could find no examples of this
-		"ㅅ" : "s",
+		"ㅅ" : "s", // TODO: find more examples of this
+					// https://github.com/osori/korean-romanizer/blob/master/korean_romanizer/pronouncer.py has h before s as ss
 		"ㅆ" : "tss", // could find no examples of this
-		"ㅇ" : "h", // need to find more examples, Wikipedia says h, my one source gives no letter.
+		"ㅇ" : "h", // TODO: need to find more examples, Wikipedia says h, my one source gives no letter.
+					// https://github.com/osori/korean-romanizer/blob/master/korean_romanizer/pronouncer.py has no letter
 		"ㅈ" : "ch",
 		"ㅉ" : "", // could find no examples of this
 		"ㅊ" : "ch", // need to find more examples, Wikipedia says tch, my one source gives just ch.
@@ -675,8 +681,10 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 	},
 }
 
+
 export function RomanizeHangul(text: string) {
-    let result: string = '';
+    let result: string = '';10
+	let storedConsonantAssimilation: string = ''
 
     for (let i = 0; i < text.length; i++)
     {
@@ -690,19 +698,61 @@ export function RomanizeHangul(text: string) {
 		const initialIndex: number = Math.floor((currentCharCode - unicodeOffset) / unicodeInitialOffset);
 		const medialIndex: number = Math.floor (((currentCharCode - unicodeOffset) % unicodeInitialOffset) / unicodeMedialOffset);
 		const finalIndex: number = ((currentCharCode - unicodeOffset) % unicodeInitialOffset) % unicodeMedialOffset;
+
+		if (storedConsonantAssimilation != '')
+		{
+			result += storedConsonantAssimilation
+		}
+		else
+		{
+			result += initialDictionary[initials[initialIndex]]
+		}
+		result += medialDictionary[medials[medialIndex]]
 		
 		let nextSyllableCode = -1;
-		if (i + 1 < text.length)
+		if (i + 1 < text.length) // this also covers the case of the string ending.
 			nextSyllableCode = text.charCodeAt(i+1);
 		
 		if (!hangul.isCharacterCodeHangulSyllable(nextSyllableCode) || finalIndex == 0)
 		{
-			result += initialDictionary[initials[initialIndex]] + medialDictionary[medials[medialIndex]] + finalDictionary[finals[finalIndex]];
+			result += finalDictionary[finals[finalIndex]];
+			storedConsonantAssimilation = '';
 			continue;
 		}
+
+		// TODO: need to deal with iotized vowel after ㄷ and ㅌ
+		// If d or t before empty initial consonant with an iotized vowel (ㅣ, ㅑ, ㅕ, ㅛ, or ㅠ )
+		// Is it all iotized vowels or just i? Need to get more examples probably.
+		// d before i = j
+		// t before i = ch
+		// d before h before i = ch
+		// j before h before i = ch
+		if (finals[finalIndex] == "ㄷ" || finals[finalIndex] == "ㅌ")
+		{
+
+		}
+
+		// TODO: batchim before h before different vowels? Need more data probably.
+		// d before h before a = t
+		// d before h before i = ch - maybe but this in the iotized palatalization stuff
+		// s before h before a = t
+		// s before h befor ae = t
+		// s before h before yeo = t
+		// s before h before wa = t
+		// j before h before yeo = t
+		// j before h before eu = t
+		// j before h before i = ch - maybe put this in the iotized palatalization stuff
+		// ch before h before ya = t
+		// ch before h before yeo = t
+		// t before h before u = t
+		// t before h before eu = t
+
+		// TODO: other weird things like ㄴinsertion.
+		// This is a final consonant followed by a second word where the second word starts with an iotized vowel ㅣ, ㅑ, ㅕ, ㅛ, or ㅠ 
+		// This is very hard to account for, since it depends on the following syllable to be the start of a word forming a compound word.
 		
 		const nextInitialIndex: number = Math.floor((nextSyllableCode - unicodeOffset) / unicodeInitialOffset);
-		const nextSyllableStartsWithConsonant = nextInitialIndex != ieungIndex;
+		storedConsonantAssimilation = consonantAssimilationDictionary[finals[finalIndex]][initials[nextInitialIndex]];
     }
 
     return result;
