@@ -125,7 +125,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "kk",
 		"ㅌ" : "kt",
 		"ㅍ" : "kp",
-		"ㅎ" : "k" // TODO: also kh, maybe find more examples
+		"ㅎ" : "k" // Wikipedia says it can also be kh, but I found no examples of that.
 	},
 	"ㄲ" : { // k
 		"ㄱ" : "kg",
@@ -188,7 +188,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "nk",
 		"ㅌ" : "nt",
 		"ㅍ" : "np",
-		"ㅎ" : "nh" // TODO: maybe find more examples of this
+		"ㅎ" : "nh"
 	},
 	"ㄵ" : { // n
 		"ㄱ" : "ng",
@@ -202,7 +202,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅃ" : "npp",
 		"ㅅ" : "ns",
 		"ㅆ" : "nss",
-		"ㅇ" : "nj",
+		"ㅇ" : "nj", // TODO: Palatalization, becomes nch before i and yeo
 		"ㅈ" : "nj",
 		"ㅉ" : "njj",
 		"ㅊ" : "nch",
@@ -210,6 +210,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅌ" : "nt",
 		"ㅍ" : "np",
 		"ㅎ" : "nch" // Could maybe be n or nh as well, but was nch in every example I could find (n=8, all followed by iotized vowels)
+					// I think it probably would generally be nch
 	},
 	"ㄶ" : { // n, the ㅎ causes following consonant to be voiceless
 		"ㄱ" : "nk",
@@ -245,14 +246,14 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅃ" : "tpp",
 		"ㅅ" : "ts",
 		"ㅆ" : "tss",
-		"ㅇ" : "d", // TODO: j before iotized vowel?
+		"ㅇ" : "d", // TODO: j before iotized vowel
 		"ㅈ" : "tj",
 		"ㅉ" : "tjj",
 		"ㅊ" : "tch",
 		"ㅋ" : "tk",
 		"ㅌ" : "tt",
 		"ㅍ" : "tp",
-		"ㅎ" : "ch" // TODO: Varies? Probably palatalized because it's before an iotized vowel in the example I had
+		"ㅎ" : "t" // TODO: ch before iotized vowel
 	},
 	"ㄹ" : { // l
 		"ㄱ" : "lg",
@@ -294,7 +295,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "kk",
 		"ㅌ" : "kt",
 		"ㅍ" : "kp",
-		"ㅎ" : "lk" // maybe different when ㅎ is before non-iotized vowels, but I could only find it before 히 and 혀 
+		"ㅎ" : "lk" // TODO: maybe different when ㅎ is before non-iotized vowels, but I could only find it before 히 and 혀 
 					// EDIT: This seems right either way.
 	},
 	"ㄻ" : { // m
@@ -321,7 +322,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 	"ㄼ" : { // this one is usually pronounced as ㄹ, 밟 is an exception
 		"ㄱ" : "lg",
 		"ㄲ" : "lkk",
-		"ㄴ" : "ll", // TODO: more examples?
+		"ㄴ" : "ll", // could find no examples of this
 		"ㄷ" : "ld",
 		"ㄸ" : "ltt",
 		"ㄹ" : "ll",
@@ -337,7 +338,8 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "lk",
 		"ㅌ" : "lt",
 		"ㅍ" : "lp",
-		"ㅎ" : "p" // TODO: sometimes ph...
+		"ㅎ" : "p" // TODO: sometimes ph... 
+					//-- actually in the only examples I have, it's 넓히다 = neolpida or 짓밟히다 = jithaphida or some variation of those two
 	},
 	"ㄽ" : { // I found no examples of this before other consonants
 		"ㄱ" : "tg",
@@ -405,8 +407,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 	"ㅀ" : { // l in the few examples I found
 		"ㄱ" : "lk",
 		"ㄲ" : "lkk",
-		"ㄴ" : "ll", // need more examples of this, all my examples are before 는
-					 // TODO: look into this
+		"ㄴ" : "ll", // need more examples of this, all my examples are before 는, but I exhausted my dictionary
 					 // according to https://github.com/osori/korean-romanizer/blob/master/korean_romanizer/pronouncer.py this would be ln
 		"ㄷ" : "lt",
 		"ㄸ" : "ltt",
@@ -416,7 +417,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅃ" : "lpp",
 		"ㅅ" : "ls", // TODO: according to https://github.com/osori/korean-romanizer/blob/master/korean_romanizer/pronouncer.py this would be lss
 		"ㅆ" : "lss",
-		"ㅇ" : "r",
+		"ㅇ" : "r", // I have examples of this being followed by 은, so it's interesting it varies whether it's followed by 은 or 는
 		"ㅈ" : "lch",
 		"ㅉ" : "ljj",
 		"ㅊ" : "lch",
@@ -494,13 +495,14 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㄴ" : "nn",
 		"ㄷ" : "td",
 		"ㄸ" : "ttt",
-		"ㄹ" : "nn", // TODO: find more examples of this, my one example is 마못류 (tr)
+		"ㄹ" : "tr", // Wikipedia says nn, but all my examples (n=5)  say tr, 
+					// e.g. 마못류 = mamotryu,  피킷라인 = pikitrain (a google search shows this is probably Picket Line)
 		"ㅁ" : "nm",
 		"ㅂ" : "tb",
 		"ㅃ" : "tpp",
 		"ㅅ" : "ts",
 		"ㅆ" : "tss",
-		"ㅇ" : "s",
+		"ㅇ" : "s", // can be nn if subject to n insertion
 		"ㅈ" : "tj",
 		"ㅉ" : "tjj",
 		"ㅊ" : "tch",
@@ -528,7 +530,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "tk",
 		"ㅌ" : "tt",
 		"ㅍ" : "tp",
-		"ㅎ" : "th" // could vary probably
+		"ㅎ" : "th"
 	},
 	"ㅇ" : { // ng
 		"ㄱ" : "ngg",
@@ -549,7 +551,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "ngk",
 		"ㅌ" : "ngt",
 		"ㅍ" : "ngp",
-		"ㅎ" : "ngh" // could vary probably
+		"ㅎ" : "ngh"
 	},
 	"ㅈ" : { // t
 		"ㄱ" : "tg",
@@ -570,7 +572,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "tk", // could find no examples of this
 		"ㅌ" : "tt",
 		"ㅍ" : "tp", // could find no examples of this
-		"ㅎ" : "ch" // probably varies. This was before iotized vowel
+		"ㅎ" : "t" // // TODO: ch before i... but still t before yeo in the examples I could find
 	},
 	"ㅊ" : { // t
 		"ㄱ" : "tg",
@@ -591,7 +593,7 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅋ" : "tk",
 		"ㅌ" : "tt",
 		"ㅍ" : "tp",
-		"ㅎ" : "t" // varies, this was before iotized vowel though
+		"ㅎ" : "t" // varies according to wikipedia, t in the two examples I could find.
 	},
 	"ㅋ" : { // k, could find no examples of almost all of these.
 		"ㄱ" : "kg",
@@ -626,14 +628,14 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 		"ㅃ" : "tpp",
 		"ㅅ" : "ts",
 		"ㅆ" : "tss",
-		"ㅇ" : "t",
+		"ㅇ" : "t", // TODO: ch before i, but still t before yeo
 		"ㅈ" : "tj",
 		"ㅉ" : "tjj",
 		"ㅊ" : "tch",
 		"ㅋ" : "tk",
 		"ㅌ" : "tt",
 		"ㅍ" : "tp",
-		"ㅎ" : "t" // could vary probably
+		"ㅎ" : "t"
 	},
 	"ㅍ" : { // p
 		"ㄱ" : "pg",
@@ -658,21 +660,23 @@ const consonantAssimilationDictionary : { [id: string]: { [id: string] : string 
 	},
 	"ㅎ" : { // t - words basically don't end in ㅎ. 히읗, the name of the jamo is an exception, and it's pronounced as a t
 		"ㄱ" : "k",
-		"ㄲ" : "", // could find no examples of this
+		"ㄲ" : "kk", // could find no examples of this
 		"ㄴ" : "nn",
 		"ㄷ" : "t",
-		"ㄸ" : "", // could find no examples of this
+		"ㄸ" : "tt", // could find no examples of this
 		"ㄹ" : "nn", // could find no examples of this, Wikipedia says nn
 		"ㅁ" : "nm", // could find no examples of this, Wikipedia says nm
-		"ㅂ" : "b", // find more examples, this seems wrong, since it should make the adjacent vowel unvoiced.
-		"ㅃ" : "", // could find no examples of this
-		"ㅅ" : "s", // TODO: find more examples of this
+		"ㅂ" : "p", // The one example I could find was a b - 옿비삼척 - obisamcheok 
+					// which seems wrong since it should make the adjacent vowel unvoiced.
+		"ㅃ" : "pp", // could find no examples of this
+		"ㅅ" : "s", // I only found one example of this - 그렇소 - geureoso
 					// https://github.com/osori/korean-romanizer/blob/master/korean_romanizer/pronouncer.py has h before s as ss
+					// wikipedia has it as hs in their table.
 		"ㅆ" : "tss", // could find no examples of this
-		"ㅇ" : "h", // TODO: need to find more examples, Wikipedia says h, my one source gives no letter.
+		"ㅇ" : "", // Wikipedia says h, every word I put through the Korean Romanization Converter gave no h
 					// https://github.com/osori/korean-romanizer/blob/master/korean_romanizer/pronouncer.py has no letter
 		"ㅈ" : "ch",
-		"ㅉ" : "", // could find no examples of this
+		"ㅉ" : "jj", // could find no examples of this
 		"ㅊ" : "ch", // need to find more examples, Wikipedia says tch, my one source gives just ch.
 		"ㅋ" : "tk", // could find no examples of this, Wikipedia says tk
 		"ㅌ" : "t", // could find no examples of this, Wikipedia says t
@@ -720,38 +724,46 @@ export function RomanizeHangul(text: string) {
 			continue;
 		}
 
-		// TODO: need to deal with iotized vowel after ㄷ and ㅌ
+		const nextInitialIndex: number = Math.floor((nextSyllableCode - unicodeOffset) / unicodeInitialOffset);
+		const nextMedialIndex: number = Math.floor (((nextSyllableCode - unicodeOffset) % unicodeInitialOffset) / unicodeMedialOffset);
+
 		// If d or t before empty initial consonant with an iotized vowel (ㅣ, ㅑ, ㅕ, ㅛ, or ㅠ )
 		// Is it all iotized vowels or just i? Need to get more examples probably.
 		// d before i = j
-		// t before i = ch
+		// t before i = ch, but not before ㅕ in the examples I found
 		// d before h before i = ch
-		// j before h before i = ch
-		if (finals[finalIndex] == "ㄷ" || finals[finalIndex] == "ㅌ")
+		// j before h before i = ch, but not before ㅕ in the examples I found
+		// I could find no examples with ㅑ, ㅛ, or ㅠ
+		if (medials[nextMedialIndex] == "ㅣ")
 		{
-
+			if (initials[nextInitialIndex] == "ㅇ")
+			{
+				if (finals[finalIndex] == "ㄷ")
+				{
+					storedConsonantAssimilation = 'j';
+					continue;
+				}
+				else if (finals[finalIndex] == "ㅌ")
+				{
+					storedConsonantAssimilation = 'ch';
+					continue;
+				}
+			}
+			else if (initials[nextInitialIndex] == "ㅎ")
+			{
+				if (finals[finalIndex] == "ㄷ" || finals[finalIndex] == "ㅌ" || finals[finalIndex] == "ㅈ")
+				{
+					storedConsonantAssimilation = 'ch';
+					continue;
+				}
+			}
 		}
-
-		// TODO: batchim before h before different vowels? Need more data probably.
-		// d before h before a = t
-		// d before h before i = ch - maybe but this in the iotized palatalization stuff
-		// s before h before a = t
-		// s before h befor ae = t
-		// s before h before yeo = t
-		// s before h before wa = t
-		// j before h before yeo = t
-		// j before h before eu = t
-		// j before h before i = ch - maybe put this in the iotized palatalization stuff
-		// ch before h before ya = t
-		// ch before h before yeo = t
-		// t before h before u = t
-		// t before h before eu = t
+		
 
 		// TODO: other weird things like ㄴinsertion.
 		// This is a final consonant followed by a second word where the second word starts with an iotized vowel ㅣ, ㅑ, ㅕ, ㅛ, or ㅠ 
 		// This is very hard to account for, since it depends on the following syllable to be the start of a word forming a compound word.
 		
-		const nextInitialIndex: number = Math.floor((nextSyllableCode - unicodeOffset) / unicodeInitialOffset);
 		storedConsonantAssimilation = consonantAssimilationDictionary[finals[finalIndex]][initials[nextInitialIndex]];
     }
 
